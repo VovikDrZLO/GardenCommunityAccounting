@@ -1,0 +1,35 @@
+﻿<Window x:Class="GardenCommunityAccounting.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GardenCommunityAccounting"        
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Image HorizontalAlignment="Left" Height="373" Margin="28,28,0,0" VerticalAlignment="Top" Width="495" Source="/Resources/Map.jpg"/>
+        <Button x:Name="LookupsBtn" Content="Довідники" HorizontalAlignment="Left" Margin="574,28,0,0" VerticalAlignment="Top" Height="30" Width="169" />
+        <Button x:Name="IncomingDocumentsBtn"  Content="Надходження" HorizontalAlignment="Left" Margin="574,76,0,0" VerticalAlignment="Top" Height="30" Width="169" Click="IncomDocBtn_Click">
+            <Button.ContextMenu>
+                <ContextMenu x:Name="IncomDocCM" ItemsSource="{Binding Path=IncomeDocumentTypes}" HasDropShadow="True">
+                    <ContextMenu.ItemContainerStyle>
+                        <Style TargetType="{x:Type MenuItem}">
+                            <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacemantTarget.DataContext.ItemChanged }"/>
+                            <Setter Property="CommandParameter" Value="{Binding ElementName=IncomeDocumentTypes, Path=Id}"/>
+                        </Style>
+                    </ContextMenu.ItemContainerStyle>
+                </ContextMenu>
+            </Button.ContextMenu>
+        </Button>
+        <Button x:Name="AutgoingDocumentsBtn" Content="Витрати" HorizontalAlignment="Left" Margin="574,124,0,0" VerticalAlignment="Top" Height="30" Width="169"/>
+        <Button x:Name="ReportsBtn" Content="Звіти" HorizontalAlignment="Left" Margin="574,173,0,0" VerticalAlignment="Top" Height="30" Width="169"/>
+        <Button x:Name="AdminBtn" Content="Адмінка" HorizontalAlignment="Left" Margin="574,217,0,0" VerticalAlignment="Top" Height="30" Width="169"/>
+        <DatePicker local:DatePickerCalendar.IsMonthYear="True" 
+            local:DatePickerDateFormat.DateFormat="MMMM-yyyy"            
+            HorizontalAlignment="Left" Margin="574,267,0,0" VerticalAlignment="Top" Height="30" Width="169"
+            SelectedDateChanged="DatePicker_SelectedDateChanged"
+            Text="MMMM-yyyy">
+        </DatePicker>
+
+    </Grid>
+</Window>
